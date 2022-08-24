@@ -1,0 +1,129 @@
+1. selection sort:
+
+import ast
+lst = input()
+lst = ast.literal_eval(lst)
+
+def selection_sort(lst):
+    
+  for i in range(len(lst)):
+    aa = i
+    ll = i + 1
+    bb = len(lst)
+    for j in range(ll, bb) :
+        if lst[aa] > lst[j]:
+            aa = j
+    lst[i] , lst[aa] = lst[aa] , lst[i]
+    print(lst)
+    
+(selection_sort(lst))
+
+2. Insertion Sort
+
+import ast
+lst = input()
+lst = ast.literal_eval(lst)
+
+def insertion_sort(lst):
+    zzz = len(lst)
+    for i in range(1,zzz):
+        aaa = lst[i]
+        j = i - 1
+        while j >= int(0) and lst[j] > aaa:
+            lst[j+1] = lst[j]
+            j = j - 1
+        lst[j + 1] = aaa
+        ll = lst
+        print(ll)
+
+insertion_sort(lst)
+
+3. Bubble sort:
+
+import ast
+lst = input()
+lst = ast.literal_eval(lst)
+
+def bubble_sort(lst):
+    nezuko = len(lst)
+    jjj = nezuko -1
+    for ions in range(jjj):
+        ggg = nezuko-ions-1
+        for jan in range(0, nezuko-ions-1):
+            if lst[jan] > lst[jan+1]:
+                lst[jan] , lst[jan+1] = lst[jan+1] , lst[jan]
+        print(lst)
+        
+bubble_sort(lst)
+
+4. sort matrix by row:
+
+import ast
+lst = input()
+lst = ast.literal_eval(lst)
+
+def sort_matrix_by_row(lst):
+    listie = lst
+    for R in listie:
+        kan = len(R) - 1
+        for i in range(kan):
+            aa = i
+            kk = i + 1
+            cc = len(R)
+            for j in range(kk, cc):
+                if R[j] <  R[aa]:
+                    aa = j
+            R[i], R[aa] = R[aa], R[i]
+    return(listie)
+
+print(sort_matrix_by_row(lst))
+
+5. sort matrix by column number:
+
+import ast
+lst = input()
+lst = ast.literal_eval(lst)
+column = int(input())
+
+def sort_matrix_by_columnNumber(lst, column):
+    aa = len(lst)-1
+    for i in range(aa):
+        m = i
+        bb = i + 1
+        kk = len(lst)
+        for j in range(bb,kk):
+            
+            if lst[m][column] > lst[j][column]:
+                m = j 
+                t = lst[m]
+                lst[m] = lst[i]
+                lst[i] = t
+    return(lst)
+print(sort_matrix_by_columnNumber(lst, column))
+
+6. sorting rectangle records:
+
+import ast
+rectangle_records = input()
+rectangle_records = ast.literal_eval(rectangle_records)
+record_title = input()
+def sort_rectangles(rectangle_records, record_title):
+    
+    for i in range(1,len(rectangle_records)):
+        
+        zoro , yami = rectangle_records[i] , (i - 1)
+        
+        while (rectangle_records[yami][record_title] > zoro[record_title]) and (0 <= yami):
+            
+            oopara = -(-yami - 1)
+            
+            rectangle_records[oopara] = rectangle_records[yami]
+            
+            yami -= int(1)
+            
+        rectangle_records[yami+1] = zoro
+        
+        jack = rectangle_records 
+        
+    return (jack)
+print(sort_rectangles(rectangle_records, record_title))

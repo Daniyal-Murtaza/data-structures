@@ -1,0 +1,79 @@
+Lab - 03:
+
+1. Prefix Expression evaluation
+
+expression = input()
+#push, pop, is_empty,top
+
+#------------------------------------------------------------------------------#
+
+def is_empty(lst):
+    return lst == []
+
+def pop(lst):
+    if is_empty(lst) == False:
+        return lst.pop()
+    else:
+        print("Stack is empty!")
+
+def top(lst):
+    if is_empty(lst) == False:
+        return lst[-1]
+    else:
+        print("Stack is Empty!")
+    
+def push(lst,item):
+    lst.append(item)
+    
+#-----------------------------------------------------------------------------#
+
+def EvalutePrefix(expression):
+    
+    # create an empty stack called operandstack.
+    operandstack = []
+    listie = []
+    
+    # convert the string to list using split method.
+    expression = expression.split()
+    
+    # Reverse the prefix expression
+    while is_empty(expression) == False:
+        push(listie,pop(expression))
+    
+    #return(listie) ---> it gives ['3', '2', '+']
+        
+    operand = "1234567890"
+    for i in listie:
+        if i in operand:
+            zoro = int(i)
+            push(operandstack,zoro)
+            
+    #return(operandstack) ---> it gives + 2 3 to [3,2]    
+     
+        elif i == "+":
+            first_operand = pop(operandstack)
+            second_operand = pop(operandstack)
+            arithemetic_operation = (first_operand)+(second_operand)
+            push(operandstack,arithemetic_operation)
+            
+        elif i == "*":
+            first_operand = pop(operandstack)
+            second_operand = pop(operandstack)
+            arithemetic_operation = (first_operand)*(second_operand)
+            push(operandstack,arithemetic_operation)
+            
+        elif i == "/":
+            first_operand = pop(operandstack)
+            second_operand = pop(operandstack)
+            arithemetic_operation = (first_operand)/(second_operand)
+            push(operandstack,int(arithemetic_operation))
+            
+        elif i == "-":
+            first_operand = pop(operandstack)
+            second_operand = pop(operandstack)
+            arithemetic_operation = (first_operand)-(second_operand)
+            push(operandstack,arithemetic_operation)
+            
+    return(pop(operandstack))
+
+print(EvalutePrefix(expression))

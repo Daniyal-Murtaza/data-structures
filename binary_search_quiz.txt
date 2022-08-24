@@ -1,0 +1,46 @@
+binary search quiz:
+
+import ast
+suits = input()
+suits = ast.literal_eval(suits)
+budget = int(input())
+
+def findSalePrice(original_price, discount_rate):
+    discount_price = original_price * (discount_rate/100)
+    sale_price = original_price - discount_price
+    return sale_price
+
+def s_lst(suits):
+    
+    listie = list()
+    for suit in suits:
+        # appending suit with discounts in a tuple form into listie.
+        listie.append((suit[0], ((suit[1]) - ((suit[1]) * (suit[2]/(50 * 2)))))) 
+    return(listie)
+    
+def buy_expensive_suit(suits, budget):
+    
+    i_f, i_l = 0, len(suits) - 1             # i_f means index first
+    t = s_lst(suits)                         # i_l means index last
+                                            
+    while i_f <= i_l:
+        avg = (i_f + i_l) // 2               # avg means average
+        i_m = avg                            # i_m means index mid
+        
+        if t[i_m][1] > budget:
+            go_left = i_m - 1
+            i_l = go_left
+            
+        elif t[i_m][1] < budget:
+            go_right = i_m + 1
+            i_f = go_right
+            
+        else:
+            return(t[i_m])
+        
+    if budget == t[0][1] or budget > t[0][1]:
+        return(s_lst(suits)[i_f-1])
+    
+    return(-1)
+
+suit_to_buy = buy_expensive_suit(suits, budget)

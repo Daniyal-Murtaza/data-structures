@@ -1,0 +1,202 @@
+lab # 04:
+
+1. Priority Queue Implementation:
+
+import ast
+queue = input()
+queue = ast.literal_eval(queue)
+
+def is_empty(queue):
+    return queue == []
+
+def Enqueue(queue, item, priority):
+    a = (item, priority)
+    
+    if is_empty(queue) == True:
+        queue.append(a)
+    else:
+        if a[1] > queue[0][1]:
+            queue.insert(0,a)
+            
+        elif a[1] == queue[0][1]:
+            queue.insert(1,a)   
+        
+        elif a[1] < queue[-1][1]:
+            queue.insert(len(queue),a)
+            
+                    
+        else:
+            for i in range(1,(len(queue))):
+                if queue[i][1] > a[1] :
+                    pass
+                elif queue[i][1] == a[1]:
+                    queue.insert(i+1,a)                    
+                    return
+                else:
+                    queue.insert(i,a)
+                    return
+                
+                
+def Dequeue(queue):
+    if is_empty(queue) == False:
+        return(queue.pop(0)[0])
+    else:
+        print("Queue is Empty!")
+
+2. HU- Help Desk:
+
+def is_empty(queue):
+    return queue == []
+
+def Enqueue(queue, item, priority):
+    a = (item, priority)
+    
+    if is_empty(queue) == True:
+        queue.append(a)
+    else:
+        if a[1] > queue[0][1]:
+            queue.insert(0,a)
+            
+        elif a[1] == queue[0][1]:
+            queue.insert(1,a)   
+        
+        elif a[1] < queue[-1][1]:
+            queue.insert(len(queue),a)
+            
+                    
+        else:
+            for i in range(1,(len(queue))):
+                if queue[i][1] > a[1] :
+                    pass
+                elif queue[i][1] == a[1]:
+                    queue.insert(i+1,a)                    
+                    return
+                else:
+                    queue.insert(i,a)
+                    return
+                
+                
+def Dequeue(queue):
+    if is_empty(queue) == False:
+        return(queue.pop(0)[0])
+    else:
+        print("Queue is Empty!")
+ 
+def front(queue):
+    return(queue[0])
+
+def rear(queue):
+    return(queue[-1])
+
+#--------------------------------------------------------------------------------#    
+    
+queue = []
+
+Enqueue(queue,"AC Not working in Tariq Rafi",5)
+Enqueue(queue,"Password Change Issue",4)
+Enqueue(queue,"Need Installation on laptop",3)
+Enqueue(queue,"Need license",1)
+Enqueue(queue,"Lab PCs Setup",3)
+Enqueue(queue,"Login Issue",4)
+
+print(Dequeue(queue))
+print(Dequeue(queue))
+print(Dequeue(queue))
+print(Dequeue(queue))
+print(Dequeue(queue))
+print(Dequeue(queue))
+
+3. Interleave the first half of the queue with the second half:
+
+import ast
+lst = input()
+lst = ast.literal_eval(lst)
+
+def is_empty(queue):
+    return queue == []
+def push(lst,item):
+    lst.append(item)
+
+#-----------------------------------------------------------------------------------#    
+
+def InterLeaveQueue(lst):      
+     
+    x,y,kai,z = 0,0,[],len(lst)//2 
+                              
+    while len(lst) > x: 
+        
+        if x % 2 != 0:
+            push(kai, lst[z])  
+            z = z + 1
+             
+        if x % 2 == 0:                      
+            push(kai, lst[y])  
+            y = y + 1 
+            
+        x = x + 1 
+        
+    return(kai)
+
+
+            
+    
+   
+
+print(InterLeaveQueue(lst))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+ 
+
+    
+    
+    
+operation = input()

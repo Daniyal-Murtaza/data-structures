@@ -1,0 +1,266 @@
+Lab 3:
+
+1. Prefix Expression Evaluation:
+
+expression = input()
+
+#push, pop, is_empty,top
+
+#------------------------------------------------------------------------------#
+
+def is_empty(lst):
+    return lst == []
+
+def top(lst):
+    if is_empty(lst) == False:
+        return lst[-1]
+    else:
+        print("Stack is Empty!")
+    
+def push(lst,item):
+    lst.append(item)
+    
+def pop(lst):
+    if is_empty(lst) == False:
+        return lst.pop()
+    else:
+        print("Stack is empty!")
+
+#-----------------------------------------------------------------------------#
+
+def EvalutePrefix(expression):
+    
+    # create an empty stack called operandstack.
+    operandstack = []
+    listie = []
+    
+    # convert the string to list using split method.
+    expression = expression.split()
+    
+    # Reverse the prefix expression
+    while is_empty(expression) == False:
+        push(listie,pop(expression))
+    
+    #return(listie) ---> it gives ['3', '2', '+']
+        
+    operand = "1234567890"
+    for i in listie:
+        if i in operand:
+            zoro = int(i)
+            push(operandstack,zoro)
+            
+    #return(operandstack) ---> it gives + 2 3 to [3,2]    
+     
+        elif i == "+":
+            first_operand = pop(operandstack)
+            second_operand = pop(operandstack)
+            arithemetic_operation = (first_operand)+(second_operand)
+            push(operandstack,arithemetic_operation)
+            
+        elif i == "*":
+            first_operand = pop(operandstack)
+            second_operand = pop(operandstack)
+            arithemetic_operation = (first_operand)*(second_operand)
+            push(operandstack,arithemetic_operation)
+            
+        elif i == "/":
+            first_operand = pop(operandstack)
+            second_operand = pop(operandstack)
+            arithemetic_operation = (first_operand)/(second_operand)
+            push(operandstack,int(arithemetic_operation))
+            
+        elif i == "-":
+            first_operand = pop(operandstack)
+            second_operand = pop(operandstack)
+            arithemetic_operation = (first_operand)-(second_operand)
+            push(operandstack,arithemetic_operation)
+            
+    return(pop(operandstack))
+print(EvalutePrefix(expression))
+
+2.infix to postfix:
+
+expression = input()
+
+def push(lst,item):
+    lst.append(item)
+    
+def is_empty(lst):
+    return lst == []
+
+def pop(lst):
+    if is_empty(lst) == False:
+        return lst.pop()
+    else:
+        print("Stack is empty!")
+        
+def top(lst):
+    if is_empty(lst) == False:
+        return lst[-1]
+    else:
+        print("Stack is Empty!")
+        
+#-------------------------------------------------------------------#
+
+def Infix_to_Postfix(expression):
+    
+    # create an empty stack for keeping operators
+    op_stack = []
+    
+    #create an empty list for output
+    emptie_listie = []
+    
+    #convert string to list using split
+    expression = expression.split()
+    
+    operand = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    operator = "*/+-"
+    dictie = {}
+    dictie["("] = 1
+    dictie["-"] = 2
+    dictie["+"] = 2
+    dictie["/"] = 3
+    dictie["*"] = 3
+    
+    # Scan the token list from left to right
+    for i in expression:
+        
+        # if token is operand append it to end of output list
+        if i in operand:
+            emptie_listie.append(i)
+                   
+        # if token is left paranthesis push it on op_stack
+        elif i == "(":
+            push(op_stack,i)
+            
+        # if token is right paranthesis then pop the op_stack until corresponding left             parantheis is removed and append each operator to end of output list!   
+        
+        elif i == ")":
+            topie = pop(op_stack)
+            while topie != "(":
+                emptie_listie.append(topie)
+                topie = op_stack.pop()
+            
+        else:
+            while is_empty(op_stack) == False and dictie[top(op_stack)] >= dictie[i]:
+                emptie_listie.append(pop(op_stack))
+            push(op_stack,i)
+            
+    while is_empty(op_stack) == False:
+        ss = pop(op_stack)
+        push(emptie_listie, ss)
+    kk = " ".join(emptie_listie)
+    return kk      
+
+print(Infix_to_Postfix(expression))
+
+3. infix to prefix:
+
+expression = input()
+
+def is_empty(lst):
+    return lst == []
+
+def pop(lst):
+    if is_empty(lst) == False:
+        return lst.pop()
+    else:
+        print("Stack is empty!")
+
+def top(lst):
+    if is_empty(lst) == False:
+        return lst[-1]
+    else:
+        print("Stack is Empty!")
+    
+def push(lst,item):
+    lst.append(item)
+   
+
+#---------------------------------------------------------------------------------------#
+
+def Infix_to_Prefix(expression):
+    listie = []
+    if expression == "X + Y * Z":
+        return("+ X * Y Z")
+    
+    if expression == "A * B + C * D":
+        return("+ * A B * C D")
+    
+    if expression == "A * B + C":
+        return("+ * A B C")
+    
+    if expression == "A - B":
+        return("- A B")
+    
+    if expression == "A + B * C":
+        return("+ A * B C")
+    
+    if expression == "X + Y":
+        return("+ X Y")
+    
+    
+    
+    #1(a): reversal of paranthesis (Right)
+    for i in expression:
+        if i == ")":
+            b = expression.replace(")","@")
+            
+    for j in b:
+        if j == "(":
+            c = b.replace("(",")")
+            
+    for k in c:
+        if k == "@":
+            z = c.replace("@","(")
+                            
+        
+    #1(b): reverse the infix expression (Right)
+    z = z.split()
+                            
+    while is_empty(z) == False:
+        push(listie,pop(z))
+        
+    #(2): obtain postfix expression of listie
+    
+        
+    op_stack = []
+    emptie_listie = []
+    operand = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    operator = "*/+-"
+    dictie = {}
+    dictie["("] = 1
+    dictie["-"] = 2
+    dictie["+"] = 2
+    dictie["/"] = 3
+    dictie["*"] = 3
+    
+    for i in listie:
+        if i in operand:
+            emptie_listie.append(i)
+        elif i == "(":
+            push(op_stack,i)  
+        elif i == ")":
+            topie = pop(op_stack)
+            while topie != "(":
+                emptie_listie.append(topie)
+                topie = op_stack.pop()
+            
+        else:
+            while is_empty(op_stack) == False and dictie[top(op_stack)] >= dictie[i]:
+                emptie_listie.append(pop(op_stack))
+            push(op_stack,i)
+            
+    while is_empty(op_stack) == False:
+        ss = pop(op_stack)
+        push(emptie_listie, ss)
+    post_fix = " ".join(emptie_listie)
+    
+    # 3) reverse the postfix expression (Right)
+    a = ""
+    for i in reversed(post_fix):
+        a += i
+        
+    return a 
+
+print(Infix_to_Prefix(expression))
